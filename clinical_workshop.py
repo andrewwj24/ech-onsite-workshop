@@ -257,39 +257,36 @@ print(f"Reading clinical sources from {source_schema}")
 # MAGIC %md
 # MAGIC ## 5. Ask Genie Code for a metric view
 # MAGIC
-# MAGIC > Create one Unity Catalog metric view for the research team's tobacco
-# MAGIC > reporting. Use the gold patient-month result from the pipeline built
-# MAGIC > from the silver encounters, clinical notes, and SDOH tables in
-# MAGIC > <source_schema>. Find and inspect that gold result before creating
-# MAGIC > the view. It has one row per patient and reporting month, with
-# MAGIC > numerator and denominator flags for screening, cessation
-# MAGIC > intervention, and the combined measure, plus clinic, clinical,
-# MAGIC > and SDOH attributes.
+# MAGIC Start a new Genie Code chat and paste this request:
+# MAGIC
+# MAGIC > I'm a clinical reporting analyst. Create one Unity Catalog metric
+# MAGIC > view named <source_schema>.tobacco_reporting_metrics over the gold
+# MAGIC > patient-month result built from the clinical silver tables in
+# MAGIC > <source_schema>. Find the gold result and inspect its columns. It has
+# MAGIC > one row per patient and reporting month, with numerator and
+# MAGIC > denominator flags for screening, cessation intervention, and the
+# MAGIC > combined measure, plus clinic, clinical, and SDOH attributes.
 # MAGIC >
-# MAGIC > Analysts need to follow rates and care gaps over time and see which
-# MAGIC > clinics and patient groups account for changes. A care gap is an
-# MAGIC > eligible current tobacco user without a qualifying intervention.
-# MAGIC > Make reporting month, clinic, clinical factors, and SDOH useful
-# MAGIC > dimensions. Include the counts behind each rate, and keep rates
-# MAGIC > accurate when users change filters or groupings. Give the metrics
-# MAGIC > clear names and descriptions for a dashboard and Genie.
-# MAGIC >
-# MAGIC > Provide dashboard-ready SQL from the view for monthly
-# MAGIC > trends, the latest month versus the prior month, and October
-# MAGIC > 2025–March 2026 versus April–September 2026 overall and by clinic
-# MAGIC > and patient group. Return both periods' rates, numerator and
-# MAGIC > denominator counts, care-gap counts, and percentage-point changes.
-# MAGIC > Create the view and give me the comparison SQL for the dashboard.
+# MAGIC > We need monthly screening, cessation intervention, and combined
+# MAGIC > rates, plus a count of cessation care gaps: eligible current tobacco
+# MAGIC > users without a qualifying intervention. Include the numerator and
+# MAGIC > denominator counts behind each rate. Let analysts group and filter
+# MAGIC > by reporting month, clinic, clinical factors, and SDOH, with rates
+# MAGIC > that recalculate correctly for each selection. Use clear names and
+# MAGIC > descriptions so the view is ready for dashboards and Genie,
+# MAGIC > including month-to-month and patient-group comparisons.
 
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 6. Ask Genie Code for a dashboard
 # MAGIC
+# MAGIC Start a separate Genie Code chat and paste this request:
+# MAGIC
 # MAGIC > I'm a clinical reporting analyst preparing a tobacco quality
-# MAGIC > AI/BI dashboard for the research team. Use the metric view built over
-# MAGIC > the gold patient-month result from <source_schema>. Find and inspect
-# MAGIC > it, and use its measures throughout. The data covers October 2025
-# MAGIC > through September 2026 and combines structured encounters,
+# MAGIC > AI/BI dashboard for the research team. Use
+# MAGIC > <source_schema>.tobacco_reporting_metrics and its measures
+# MAGIC > throughout. The data covers October 2025 through September 2026
+# MAGIC > and combines structured encounters,
 # MAGIC > note-derived intervention evidence, and SDOH.
 # MAGIC >
 # MAGIC > Give us headline KPIs for the latest month's screening, cessation
@@ -306,8 +303,8 @@ print(f"Reading clinical sources from {source_schema}")
 # MAGIC >
 # MAGIC > Organize the dashboard into clear overview, trend, and cohort
 # MAGIC > comparison sections. Add useful month, clinic, and patient-group
-# MAGIC > filters; choose charts that make differences easy to see. Use the
-# MAGIC > comparison SQL from the metric view step and create the dashboard.
+# MAGIC > filters; choose charts that make differences easy to see. Create
+# MAGIC > the dashboard from the metric view.
 # MAGIC
 # COMMAND ----------
 # MAGIC %md

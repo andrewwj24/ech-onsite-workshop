@@ -270,45 +270,36 @@ print(f"Reading finance sources from {source_schema}")
 # MAGIC %md
 # MAGIC ## 5. Ask Genie Code for a metric view
 # MAGIC
-# MAGIC > Create one Unity Catalog metric view for the finance team's service
-# MAGIC > line reporting. Use the gold hospital-account result from the
-# MAGIC > pipeline built from the four silver tables in <source_schema>. Find
-# MAGIC > and inspect that gold result before creating the view. Each row is
-# MAGIC > one hospital account, with patient and encounter IDs, discharge
-# MAGIC > dates, facility, service line, product, patient type, surgical flag,
-# MAGIC > MS-DRG weight, and account-level revenue and costs.
+# MAGIC Start a new Genie Code chat and paste this request:
+# MAGIC
+# MAGIC > I'm a service line analyst. Create one Unity Catalog metric view
+# MAGIC > named <source_schema>.service_line_metrics over the gold
+# MAGIC > hospital-account result built from the finance silver tables in
+# MAGIC > <source_schema>. Find the gold result and inspect its columns. Each
+# MAGIC > row is one hospital account, with patient and encounter IDs,
+# MAGIC > discharge dates, facility, service line, product, patient type,
+# MAGIC > surgical flag, MS-DRG weight, and account-level revenue and costs.
 # MAGIC >
-# MAGIC > Analysts need to explore patient and encounter volume, surgical
-# MAGIC > cases, case mix, estimated net revenue, costs, and revenue after
-# MAGIC > direct costs across months, service lines, and other useful groups.
-# MAGIC > Make discharge date and month, facility, service line, product,
-# MAGIC > patient type, and financial class useful dimensions. Include
-# MAGIC > distinct patient and encounter counts, surgical cases, inpatient
-# MAGIC > case mix index, estimated net revenue, direct and indirect costs,
-# MAGIC > and revenue after direct costs as reusable measures. Count patients
-# MAGIC > distinctly for each selection, and calculate case mix only from
-# MAGIC > inpatient accounts with a DRG weight. Give the metrics clear names
-# MAGIC > and descriptions.
-# MAGIC >
-# MAGIC > Provide dashboard-ready comparison SQL from the view:
-# MAGIC > August 2026 versus July 2026 (MoM) and August 2025 (YoY);
-# MAGIC > September 1–20, 2026 versus the same days in 2025 (MTD); and
-# MAGIC > Emergency visits in April–August 2026 versus those months in 2025
-# MAGIC > by facility and product. Return current and prior values, absolute
-# MAGIC > changes, and percentage changes for encounter volume, estimated
-# MAGIC > net revenue, and revenue after direct costs, both overall and by
-# MAGIC > service line, facility, product, and patient type. Align the
-# MAGIC > partial-month days because the data ends September 20, 2026. Create
-# MAGIC > the view and give me the comparison SQL for the dashboard.
+# MAGIC > We need reusable measures for distinct patients and encounters,
+# MAGIC > surgical cases, inpatient case mix index, estimated net revenue,
+# MAGIC > direct and indirect costs, and revenue after direct costs. Let
+# MAGIC > analysts group and filter by discharge date and month, fiscal
+# MAGIC > period, facility, service line, product, patient type, and financial
+# MAGIC > class. Patient counts must stay distinct for each selection; case
+# MAGIC > mix uses only inpatient accounts with a DRG weight. Use clear names
+# MAGIC > and descriptions so the view supports monthly trends, MoM, YoY,
+# MAGIC > and matched-day MTD comparisons in dashboards and Genie. The data
+# MAGIC > ends September 20, 2026.
 
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 6. Ask Genie Code for a dashboard
 # MAGIC
+# MAGIC Start a separate Genie Code chat and paste this request:
+# MAGIC
 # MAGIC > I'm a service line analyst preparing a financial reporting AI/BI
-# MAGIC > dashboard. Use the metric view built over the gold hospital-account
-# MAGIC > result from <source_schema>. Find and inspect it, and use its
-# MAGIC > measures throughout. The data covers October 2024 through
+# MAGIC > dashboard. Use <source_schema>.service_line_metrics and its measures
+# MAGIC > throughout. The data covers October 2024 through
 # MAGIC > September 20, 2026.
 # MAGIC >
 # MAGIC > Give us headline KPIs for distinct patients, encounters, surgical
@@ -327,8 +318,8 @@ print(f"Reading finance sources from {source_schema}")
 # MAGIC > revenue and revenue after direct costs for those visits. Organize
 # MAGIC > the dashboard into clear overview, trend, and comparison sections
 # MAGIC > with useful date, service line, facility, product, and patient type
-# MAGIC > filters. Use the comparison SQL from the metric view step, label
-# MAGIC > every comparison period and cutoff, and create the dashboard.
+# MAGIC > filters. Label every comparison period and cutoff, and create the
+# MAGIC > dashboard from the metric view.
 # MAGIC
 # COMMAND ----------
 # MAGIC %md

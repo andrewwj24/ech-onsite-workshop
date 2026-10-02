@@ -4,7 +4,7 @@
 
 1. In **Workspace**, open a folder where you can create content. Select
    **Create > Git folder**.
-2. Paste `https://github.com/andrew-wallacejackson_data/ech-onsite-workshop.git`,
+2. Paste `https://github.com/andrewwj24/ech-onsite-workshop.git`,
    choose **GitHub** as the provider, name the folder `ech_onsite`, and select
    **Create Git folder**. No GitHub credential is needed to clone this public
    repository.
@@ -82,21 +82,22 @@ cells let participants inspect the silver tables, try an AI function on four
 notes, and see how a direct note join multiplies encounter rows. A short
 Genie Code question summarizes the sources; short observations beside the SQL
 results become the learner's request for a pipeline through gold. After they
-review gold, a second request creates the metric view and monthly
-and cohort comparison queries for the dashboard. The setup does not create
-those learner outputs.
+review gold, they start a new Genie Code chat to create the metric view and
+monthly reporting measures. In another chat, an analyst asks for a dashboard
+over that view, including monthly and patient-group comparisons.
+The setup does not create those learner outputs.
 
 Open `finance_workshop.py` for the finance track and enter the
 full finance catalog.schema name in its `source_schema` widget. Learners use
 SQL to inspect accounts, primary encounters, department mappings, and EPSi
 account results. Three short observations become a request for Genie Code to
-build an account-grain gold pipeline, followed by one metric view. The metric
-view holds reusable volume, CMI, revenue, and cost definitions. Comparison
-queries over it return actual, prior, and change values for complete-month
-MoM/YoY and same-day MTD versus prior-year MTD. The dashboard reuses those
-queries and includes headline volumes, a monthly trend, service line
-variance, financial impact, and interactive filters with Genie for
-follow-up questions.
+build an account-grain gold pipeline. In a new chat, an analyst creates one
+metric view with reusable volume, CMI, revenue, and cost definitions, plus dates
+and dimensions for comparison. In another chat, the analyst asks for
+a dashboard with complete-month MoM and YoY comparisons, matched-day MTD
+versus prior-year MTD, headline volumes, a monthly trend, service line
+variance, financial impact, and interactive filters. The dashboard uses the
+metric view directly, and Genie can use the same view for follow-up questions.
 
 The finance sources resemble Clarity account, encounter, and department data
 plus EPSi account-level financial results. All data, fiscal rules, and amounts
