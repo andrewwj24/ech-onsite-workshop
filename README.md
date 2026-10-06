@@ -114,7 +114,10 @@ uses the metric view, which can also serve Genie questions.
 
 Manager reference prompts for the analyst build are in
 `CLINICAL_ANALYST_PROMPTS.md` and `FINANCE_ANALYST_PROMPTS.md`. The participant
-notebooks contain only the goals for those assets.
+notebooks contain only the goals for those assets. Before using a reference
+prompt, replace `<gold_table>` and `<metric_view>` with the team's fully
+qualified Unity Catalog object names; the two objects may be in different
+schemas.
 
 The finance sources resemble Clarity account, encounter, and department data
 plus EPSi account-level financial results. All data, fiscal rules, and amounts
