@@ -76,6 +76,20 @@ If one is owned by a running pipeline or your identity lacks permission to
 drop an object, setup stops with the object's name so you can resolve that
 ownership or permission issue before rerunning.
 
+## Give teams their notebooks
+
+Keep the Git folder for managers. Copy the relevant participant notebooks,
+`clinical_workshop.py` and/or `finance_workshop.py`, into a regular Workspace
+folder for each team, then share that folder with the team. Teams can work from
+those copies without access to the manager's Git folder. Give them the needed
+Unity Catalog permissions for the prepared data and their own reporting assets.
+If several teams build the same track, give each team a separate destination
+schema or unique output names so their gold tables and metric views do not
+overwrite one another. All teams can read the same prepared silver sources.
+
+This controls Workspace sharing. The GitHub repository is public, so its other
+files, including the example prompts, remain available to anyone with the URL.
+
 Open `clinical_workshop.py` as the participant notebook. Enter
 the full clinical catalog.schema name in its source_schema widget. Its SQL
 cells let participants inspect the silver tables, try an AI function on four
@@ -97,6 +111,10 @@ a metric view with reusable volume, CMI, revenue, and cost measures and for a
 dashboard with MoM, YoY, matched-day MTD, service line trends, and an Emergency
 volume investigation. Teams choose their own prompts and design. The dashboard
 uses the metric view, which can also serve Genie questions.
+
+Manager reference prompts for the analyst build are in
+`CLINICAL_ANALYST_PROMPTS.md` and `FINANCE_ANALYST_PROMPTS.md`. The participant
+notebooks contain only the goals for those assets.
 
 The finance sources resemble Clarity account, encounter, and department data
 plus EPSi account-level financial results. All data, fiscal rules, and amounts
