@@ -255,70 +255,34 @@ print(f"Reading clinical sources from {source_schema}")
 
 # COMMAND ----------
 # MAGIC %md
-# MAGIC ## 5. Ask Genie Code for a metric view
+# MAGIC ## 5. Team build: metric view and dashboard
 # MAGIC
-# MAGIC Start a new Genie Code chat and paste this request:
+# MAGIC The guided engineering work ends with your gold patient-month result.
+# MAGIC Your team now builds the reporting layer. Use the metric view and
+# MAGIC dashboard training to choose how to create each asset. If you use
+# MAGIC Genie Code, start a fresh chat for each asset.
 # MAGIC
-# MAGIC > I'm a clinical reporting analyst. Create one Unity Catalog metric
-# MAGIC > view named <source_schema>.tobacco_reporting_metrics over the gold
-# MAGIC > patient-month result built from the clinical silver tables in
-# MAGIC > <source_schema>. Find the gold result and inspect its columns. It has
-# MAGIC > one row per patient and reporting month, with numerator and
-# MAGIC > denominator flags for screening, cessation intervention, and the
-# MAGIC > combined measure, plus clinic, clinical, and SDOH attributes.
-# MAGIC >
-# MAGIC > We need monthly screening, cessation intervention, and combined
-# MAGIC > rates, plus a count of cessation care gaps: eligible current tobacco
-# MAGIC > users without a qualifying intervention. Include the numerator and
-# MAGIC > denominator counts behind each rate. Let analysts group and filter
-# MAGIC > by reporting month, clinic, clinical factors, and SDOH, with rates
-# MAGIC > that recalculate correctly for each selection. Use clear names and
-# MAGIC > descriptions so the view is ready for dashboards and Genie,
-# MAGIC > including month-to-month and patient-group comparisons.
-
-# COMMAND ----------
-# MAGIC %md
-# MAGIC ## 6. Ask Genie Code for a dashboard
+# MAGIC ### Metric view goal
 # MAGIC
-# MAGIC Start a separate Genie Code chat and paste this request:
+# MAGIC Create one Unity Catalog metric view over your gold result. It should:
 # MAGIC
-# MAGIC > I'm a clinical reporting analyst preparing a tobacco quality
-# MAGIC > AI/BI dashboard for the research team. Use
-# MAGIC > <source_schema>.tobacco_reporting_metrics and its measures
-# MAGIC > throughout. The data covers October 2025 through September 2026
-# MAGIC > and combines structured encounters,
-# MAGIC > note-derived intervention evidence, and SDOH.
-# MAGIC >
-# MAGIC > Give us headline KPIs for the latest month's screening, cessation
-# MAGIC > intervention, and combined rates, plus the number of cessation care
-# MAGIC > gaps. Show numerator and denominator counts behind each rate and
-# MAGIC > each rate's percentage-point change from the prior month. Add
-# MAGIC > monthly trend charts for rates and care gaps. Show where the
-# MAGIC > later-month cessation decline is concentrated across clinics and
-# MAGIC > patient groups. Compare October 2025–March 2026 with
-# MAGIC > April–September 2026, showing rate changes in percentage points
-# MAGIC > and denominator counts.
-# MAGIC > Make transportation barriers, other SDOH needs, and clinical factors
-# MAGIC > such as COPD or diabetes available for investigation.
-# MAGIC >
-# MAGIC > Organize the dashboard into clear overview, trend, and cohort
-# MAGIC > comparison sections. Add useful month, clinic, and patient-group
-# MAGIC > filters; choose charts that make differences easy to see. Create
-# MAGIC > the dashboard from the metric view.
+# MAGIC - Expose screening, cessation intervention, and combined measure rates,
+# MAGIC   with numerator and denominator counts behind each rate.
+# MAGIC - Count cessation care gaps: eligible current tobacco users without a
+# MAGIC   qualifying intervention.
+# MAGIC - Support reporting by month, clinic, clinical factors, and SDOH. Rates
+# MAGIC   should recalculate for each selection. Use clear names for Genie.
 # MAGIC
-# COMMAND ----------
-# MAGIC %md
-# MAGIC ## 7. Explore with Genie
+# MAGIC ### Dashboard goal
 # MAGIC
-# MAGIC Link a Genie space to the same metric view. Inspect the counts behind
-# MAGIC any surprising rate, and review a few note-supported patient cases
-# MAGIC before interpreting cohort patterns.
+# MAGIC Build an AI/BI dashboard from your metric view for the research team:
 # MAGIC
-# MAGIC Suggested Genie questions:
+# MAGIC - Show the latest month's rates and care gaps, with supporting counts
+# MAGIC   and percentage-point changes from the prior month.
+# MAGIC - Show monthly trends and compare October 2025–March 2026 with
+# MAGIC   April–September 2026.
+# MAGIC - Help users find which clinics and patient groups contribute to the
+# MAGIC   later-month cessation decline, including SDOH and clinical factors.
 # MAGIC
-# MAGIC - How has the cessation intervention rate changed by month and clinic?
-# MAGIC - Which clinic has the largest increase in patients with a cessation
-# MAGIC   care gap in the later months?
-# MAGIC - Within each clinic, how does the rate differ for patients with and
-# MAGIC   without a transportation barrier?
-# MAGIC - What are the numerator and denominator behind each monthly rate?
+# MAGIC Choose your own charts and layout. Present one finding supported by
+# MAGIC rates and counts.

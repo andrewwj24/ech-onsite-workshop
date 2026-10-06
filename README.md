@@ -82,22 +82,21 @@ cells let participants inspect the silver tables, try an AI function on four
 notes, and see how a direct note join multiplies encounter rows. A short
 Genie Code question summarizes the sources; short observations beside the SQL
 results become the learner's request for a pipeline through gold. After they
-review gold, they start a new Genie Code chat to create the metric view and
-monthly reporting measures. In another chat, an analyst asks for a dashboard
-over that view, including monthly and patient-group comparisons.
-The setup does not create those learner outputs.
+review gold, the notebook ends with team goals for a metric view and dashboard.
+Teams choose how to create those assets using their training. The clinical
+metric view supports reusable tobacco measures; the dashboard explores trends,
+care gaps, and differences across clinics and patient groups. The setup does
+not create those learner outputs.
 
 Open `finance_workshop.py` for the finance track and enter the
 full finance catalog.schema name in its `source_schema` widget. Learners use
 SQL to inspect accounts, primary encounters, department mappings, and EPSi
 account results. Three short observations become a request for Genie Code to
-build an account-grain gold pipeline. In a new chat, an analyst creates one
-metric view with reusable volume, CMI, revenue, and cost definitions, plus dates
-and dimensions for comparison. In another chat, the analyst asks for
-a dashboard with complete-month MoM and YoY comparisons, matched-day MTD
-versus prior-year MTD, headline volumes, a monthly trend, service line
-variance, financial impact, and interactive filters. The dashboard uses the
-metric view directly, and Genie can use the same view for follow-up questions.
+build an account-grain gold pipeline. The notebook then gives teams goals for
+a metric view with reusable volume, CMI, revenue, and cost measures and for a
+dashboard with MoM, YoY, matched-day MTD, service line trends, and an Emergency
+volume investigation. Teams choose their own prompts and design. The dashboard
+uses the metric view, which can also serve Genie questions.
 
 The finance sources resemble Clarity account, encounter, and department data
 plus EPSi account-level financial results. All data, fiscal rules, and amounts

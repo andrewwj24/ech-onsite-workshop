@@ -268,74 +268,37 @@ print(f"Reading finance sources from {source_schema}")
 
 # COMMAND ----------
 # MAGIC %md
-# MAGIC ## 5. Ask Genie Code for a metric view
+# MAGIC ## 5. Team build: metric view and dashboard
 # MAGIC
-# MAGIC Start a new Genie Code chat and paste this request:
+# MAGIC The guided engineering work ends with one gold row per hospital
+# MAGIC account. Your team now builds the reporting layer. Use the metric view
+# MAGIC and dashboard training to choose how to create each asset. If you use
+# MAGIC Genie Code, start a fresh chat for each asset.
 # MAGIC
-# MAGIC > I'm a service line analyst. Create one Unity Catalog metric view
-# MAGIC > named <source_schema>.service_line_metrics over the gold
-# MAGIC > hospital-account result built from the finance silver tables in
-# MAGIC > <source_schema>. Find the gold result and inspect its columns. Each
-# MAGIC > row is one hospital account, with patient and encounter IDs,
-# MAGIC > discharge dates, facility, service line, product, patient type,
-# MAGIC > surgical flag, MS-DRG weight, and account-level revenue and costs.
-# MAGIC >
-# MAGIC > We need reusable measures for distinct patients and encounters,
-# MAGIC > surgical cases, inpatient case mix index, estimated net revenue,
-# MAGIC > direct and indirect costs, and revenue after direct costs. Let
-# MAGIC > analysts group and filter by discharge date and month, fiscal
-# MAGIC > period, facility, service line, product, patient type, and financial
-# MAGIC > class. Patient counts must stay distinct for each selection; case
-# MAGIC > mix uses only inpatient accounts with a DRG weight. Use clear names
-# MAGIC > and descriptions so the view supports monthly trends, MoM, YoY,
-# MAGIC > and matched-day MTD comparisons in dashboards and Genie. The data
-# MAGIC > ends September 20, 2026.
-
-# COMMAND ----------
-# MAGIC %md
-# MAGIC ## 6. Ask Genie Code for a dashboard
+# MAGIC ### Metric view goal
 # MAGIC
-# MAGIC Start a separate Genie Code chat and paste this request:
+# MAGIC Create one Unity Catalog metric view over your gold account result. It
+# MAGIC should:
 # MAGIC
-# MAGIC > I'm a service line analyst preparing a financial reporting AI/BI
-# MAGIC > dashboard. Use <source_schema>.service_line_metrics and its measures
-# MAGIC > throughout. The data covers October 2024 through
-# MAGIC > September 20, 2026.
-# MAGIC >
-# MAGIC > Give us headline KPIs for distinct patients, encounters, surgical
-# MAGIC > cases, inpatient case mix index, estimated net revenue, direct and
-# MAGIC > indirect costs, and revenue after direct costs. Show monthly trend
-# MAGIC > charts for volume and the main financial metrics. Add comparison
-# MAGIC > views by service line, facility, and product with actual values,
-# MAGIC > prior values, and absolute and percentage changes. For complete
-# MAGIC > months, compare August 2026 with July 2026 and August 2025. Compare
-# MAGIC > September 1–20, 2026 with the same days in 2025 so the partial
-# MAGIC > month is aligned.
-# MAGIC >
-# MAGIC > Include an Emergency focus: compare April–August 2026 with the
-# MAGIC > same months in 2025, show which facility and product account for
-# MAGIC > the observed visit decline, and show the change in estimated net
-# MAGIC > revenue and revenue after direct costs for those visits. Organize
-# MAGIC > the dashboard into clear overview, trend, and comparison sections
-# MAGIC > with useful date, service line, facility, product, and patient type
-# MAGIC > filters. Label every comparison period and cutoff, and create the
-# MAGIC > dashboard from the metric view.
+# MAGIC - Define distinct patient and encounter counts, surgical case count,
+# MAGIC   inpatient case mix index, estimated net revenue, direct and indirect
+# MAGIC   costs, and revenue after direct costs.
+# MAGIC - Support reporting by discharge date and month, fiscal period,
+# MAGIC   facility, service line, product, patient type, and financial class.
+# MAGIC - Recalculate measures for each selection. Case mix uses only inpatient
+# MAGIC   accounts with an MS-DRG weight. Use clear names for Genie.
 # MAGIC
-# COMMAND ----------
-# MAGIC %md
-# MAGIC ## 7. Explore with Genie
+# MAGIC ### Dashboard goal
 # MAGIC
-# MAGIC Link a Genie space to the same metric view. Try questions such as:
+# MAGIC Build an AI/BI dashboard from your metric view for the finance team:
 # MAGIC
-# MAGIC - How much did Emergency encounter volume change from April–August
-# MAGIC   2025 to April–August 2026?
-# MAGIC - Which facility and product account for most of that change?
-# MAGIC - How did estimated revenue and revenue after direct costs change for
-# MAGIC   those Emergency visits?
-# MAGIC - What is September MTD encounter volume versus the same days last year?
-# MAGIC - Which service lines grew in volume but fell in revenue after direct
-# MAGIC   costs?
+# MAGIC - Show headline volume and financial KPIs, monthly trends, and
+# MAGIC   changes by service line, facility, and product.
+# MAGIC - Compare August 2026 with July 2026 (MoM) and August 2025 (YoY).
+# MAGIC   Compare September 1–20, 2026 with the same days in 2025 (MTD).
+# MAGIC - Show which facility and product contribute to the April–August
+# MAGIC   Emergency visit decline versus 2025, including changes in estimated
+# MAGIC   net revenue and revenue after direct costs.
 # MAGIC
-# MAGIC Ask for the counts and periods behind any explanation. The results
-# MAGIC identify observed contributors to a trend, not the cause of patient
-# MAGIC behavior.
+# MAGIC Label periods and add useful filters. Choose your own charts and
+# MAGIC layout. Present one finding supported by the metric view.
